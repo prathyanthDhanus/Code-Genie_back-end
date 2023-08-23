@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const studentSchema = new mongoose.Schema({
+   userName:String,
+   batch_Number:String,
+   eMail:String,
+   passWord:String,
+   profile:[{
     fullName: String,
     eMail: String,
     phoneNumber: Number,
@@ -12,6 +17,7 @@ const studentSchema = new mongoose.Schema({
     guardianRelation: String,
     guardianPhoneNumber: Number
   
+   }] 
 })
 
 

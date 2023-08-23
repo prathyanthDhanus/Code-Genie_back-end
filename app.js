@@ -16,12 +16,10 @@ const adminRoutes = require("./src/routes/adminRoutes")
 app.use("/",adminRoutes);
 
 
-
 //-------------------student route-------------------------
 
 const studentRoutes = require("./src/routes/studentRoutes")
 app.use("/",studentRoutes)
-
 
 
 

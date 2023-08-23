@@ -13,7 +13,7 @@ const profileDetails = async (req,res)=>{
     try{
         console.log("hai");
         const profileData = req.body;
-        const newProfile = new student(profileData);
+        const newProfile = new student({profile:profileData});
         await newProfile.save()
         res.status(200).json({ message: 'Profile saved successfully' });
 

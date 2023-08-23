@@ -8,7 +8,7 @@ const admin = require("../controller/adminController");
 
 
 router.post("/admin/login",admin.adminLogin);
-
+router.post("/admin/student/register",admin.studentRegister)
 
 
 
