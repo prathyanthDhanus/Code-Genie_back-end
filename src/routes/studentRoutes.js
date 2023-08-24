@@ -4,8 +4,8 @@ const student = require("../controller/studentController");
 
 
 
-router.post("/student/profile",student.profileDetails)
-
+router.post("/student/profile",student.createProfile)
+router.post("/student/login",student.studentLogin)
 
 
 
