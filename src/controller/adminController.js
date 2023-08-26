@@ -9,9 +9,9 @@ const adminLogin = async (req, res) => {
     const password = process.env.ADMIN_PASSWORD
 
     const USERNAME = req.body.username
-    const PASSWORD = req.body.password
+    const passWord= req.body.passWord
 
-    if (username == USERNAME && password == PASSWORD) {
+    if (username == USERNAME && password == passWord) {
         
         // const token = jwt.sign({ username }, "adminscrtkey", { expiresIn: "24h" })
         return res.status(200).json({
@@ -36,7 +36,7 @@ const studentRegister = async (req,res)=>{
     try{
 // const student = [];
 const { userName, batch_Number, passWord,eMail } = req.body;
-console.log(req.body)
+// console.log(req.body)
 
 if (!userName || !batch_Number || !passWord || !eMail) {
     return res.status(400).json({ message: 'All fields are required.' });
