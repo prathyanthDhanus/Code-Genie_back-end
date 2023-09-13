@@ -32,7 +32,7 @@ const studentLogin = async (req, res) => {
         // console.log(req.body)
         const identifyStudent = await student.findOne({ eMail: eMail });
 
-        console.log(identifyStudent)
+        // console.log(identifyStudent)
         if (!identifyStudent) {
             return res.json({
                 status: "failure",

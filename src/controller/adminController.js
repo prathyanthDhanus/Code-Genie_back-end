@@ -9,7 +9,7 @@ const adminLogin = async (req, res) => {
     const password = process.env.ADMIN_PASSWORD
     //  console.log(username);
     const USERNAME = req.body.userName
-    
+  
     const passWord = req.body.passWord
 
     if (username === USERNAME && password === passWord) {
@@ -41,7 +41,7 @@ const studentRegister = async (req, res) => {
         if (!userName || !batch_Number || !passWord || !eMail) {
             return res.status(400).json({ message: 'All fields are required.' });
         }
-        
+
         const identifyStudent = await student.findOne({ eMail: eMail })
         // console.log(identifyStudent)
         if (identifyStudent) {
@@ -77,12 +77,14 @@ const getAllStudents = async (req, res) => {
 
 }
 
-//----------------------get student by id--------------------------------------
+//-------------------------get student by id--------------------------------------
 
 const getStudentsbyId = async (req,res)=>{
     const studentId = req.params.id;
-    const identifyStudent = await student.findById(studentId);
-    if(studentId){
+    // console.log((student));
+    const identifyStudent = await student.findById({_id:studentId});
+    // console.log((identifyStudent));
+    if(identifyStudent){
         return res.json({
  
              status: "success",
@@ -96,6 +98,37 @@ const getStudentsbyId = async (req,res)=>{
 
 }
 
+//----------------------------update a student------------------------------------
+
+  const updateStudent = async (req,res)=>{
+      const studentId = req.params.id;
+     const data = req.body;
+      const identifyStudent = await student.findByIdAndUpdate(studentId,data,{new:true})
+      res.json({
+
+        status: "success",
+
+        message: "Profile updated successfully",
+
+        data: identifyStudent
+    })
+  }
+
+  //--------------------------delete a student------------------------------------
+
+  const deleteStudent = async (req,res)=>{
+    const studentId = req.params.id;
+    const identifyStudent = await student.findByIdAndDelete(studentId)
+    res.json({
+
+        status: "success",
+
+        message: "Profile Deleted successfully",
+
+        data: identifyStudent
+    })
+  
+  }
 
 
-module.exports = { adminLogin, studentRegister, getAllStudents,getStudentsbyId };
+module.exports = { adminLogin, studentRegister, getAllStudents,getStudentsbyId,updateStudent,deleteStudent };
