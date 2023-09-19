@@ -36,6 +36,7 @@ const adminLogin = async (req, res) => {
 const studentRegister = async (req, res) => {
    
         const { userName, batch_Number, passWord, eMail } = req.body;
+        // console.log(userName);
         // console.log(req.body)
 
         if (!userName || !batch_Number || !passWord || !eMail) {
@@ -130,5 +131,6 @@ const getStudentsbyId = async (req,res)=>{
   
   }
 
+  
 
 module.exports = { adminLogin, studentRegister, getAllStudents,getStudentsbyId,updateStudent,deleteStudent };
