@@ -1,6 +1,6 @@
 const student = require("../model/studentSchema")
 
-//-----------------------------------get all batch------------------------
+//-----------------------------------get all batch-------------------------
 
 const getAllBatch = async (req,res)=>{
       const  batchData = await student.distinct("batch_Number")
@@ -14,7 +14,7 @@ const getAllBatch = async (req,res)=>{
     })
 }
 
-//----------------------------Show details of a batch---------------------
+//----------------------------Show details of a batch----------------------
 
 const detailOfaBatch = async (req,res)=>{
   const batch = req.params.id
@@ -29,14 +29,20 @@ const detailOfaBatch = async (req,res)=>{
 })
 }
 
-//---------------------------------deActivate batch --------------------------
+//---------------------------------DeActivate/Active batch --------------------------
 
 const inActivateBatch = async (req,res)=>{
+ 
   const batch =  req.params.id;
-  const batchStatus = await student.updateMany({batch_Number:batch},{ isActiveBatch: false })
+  const isBatchStatus = req.body;
+  // console.log(isBatchStatus);
   
-  // console.log(batchStatus);
-  return res.status(200).json({
+
+  // console.log(batch);
+ 
+  const batchStatus = await student.updateMany({batch_Number:batch},isBatchStatus,{new:true})
+
+  return res.status(200).json({ 
 
     status: "success",
 
@@ -51,8 +57,8 @@ const inActivateBatch = async (req,res)=>{
 
 const getActiveBatch = async (req,res)=>{
   
-  const batchStatus = await student.find({ isBatchStatus:true}).select("batch_Number");
-
+  const batchStatus = await student.find({ isBatchStatus:true}).select("batch_Number").distinct("batch_Number");
+// console.log(batchStatus);
   return res.status(200).json({
 
     status: "success",
@@ -68,8 +74,8 @@ const getActiveBatch = async (req,res)=>{
 
 const getDeactiveBatch = async (req,res)=>{
  
-  const batchStatus = await student.find({ isBatchStatus:false}).select("batch_Number");
-  
+  const batchStatus = await student.find({ isBatchStatus:false}).select("batch_Number").distinct("batch_Number");
+  // console.log(batchStatus);
   if(batchStatus.length>0){
     return res.status(200).json({
 
@@ -87,7 +93,7 @@ const getDeactiveBatch = async (req,res)=>{
   
       message: "No deactivated batch",
   
-      data:batchStatus
+      data:[]
   })
   }
  
