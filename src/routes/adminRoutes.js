@@ -4,6 +4,7 @@ const admin = require("../controller/adminController");
 const batch = require("../controller/batchController");
 const topic = require("../controller/topicController");
 const tryCatch = require ("../middleware/tryCatch");
+const attendance = require("../controller/attendanceController");
 
 
 
@@ -34,9 +35,12 @@ router.patch("/admin/batch/:id",tryCatch(batch.inActivateBatch))
 router.post("/admin/topic",tryCatch(topic.createTopic));
 
 router.get("/admin/domain",tryCatch(topic.viewDomain));
+// router.get("/admin/domain/category/:domainName",tryCatch(topic.viewCategory))
+router.get("/admin/domain/category/:id",tryCatch(topic.viewCategory))
 
+//--------------------------attendance section-----------------------
 
-
+router.post("/admin/student/attendance",tryCatch(attendance.createAttendance))
 
 
 

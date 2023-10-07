@@ -5,7 +5,10 @@ const domainSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
+//   category: {
+//     type: String,
+//     required: true,
+//   },
 });
 
 module.exports = mongoose.model('Domain', domainSchema);
