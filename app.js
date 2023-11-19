@@ -7,9 +7,12 @@ const port = 3000
 require('dotenv').config();
 
 const url = process.env.MONGODB_URL
+
+// console.log("hyyyyyy");
+// console.log("mongodb url",url);
 app.use(express.json());
 
-app.use(cors())
+app.use(cors());
 
 //----------------------admin route------------------------
 

@@ -5,6 +5,8 @@ const batch = require("../controller/batchController");
 const topic = require("../controller/topicController");
 const tryCatch = require ("../middleware/tryCatch");
 const attendance = require("../controller/attendanceController");
+const quiz = require("../controller/questionController");
+
 
 
 
@@ -38,9 +40,36 @@ router.get("/admin/domain",tryCatch(topic.viewDomain));
 // router.get("/admin/domain/category/:domainName",tryCatch(topic.viewCategory))
 router.get("/admin/domain/category/:id",tryCatch(topic.viewCategory))
 
+router.get("/admin/domain/topic/:id",tryCatch(topic.getTopicName));
+
+router.put("/admin/domain/topic/:id",tryCatch(topic.updateTopic));
+
+router.delete("/admin/domain/topic/:id",tryCatch(topic.deleteTopic));
+
+
 //--------------------------attendance section-----------------------
 
-router.post("/admin/student/attendance",tryCatch(attendance.createAttendance))
+router.post("/admin/student/attendance/:id",tryCatch(attendance.createAttendance))
+
+
+//---------------------------question section-----------------------
+
+router.post("/admin/quiz/question",tryCatch(quiz.createQuestions))
+
+router.get("/admin/quiz/allquestion/:id",tryCatch(quiz.getQuestionsbyCategory))
+
+router.put("/admin/quiz/allquestion/:id",tryCatch(quiz.updateQuestions))
+
+router.delete("/admin/quiz/question/:id",tryCatch(quiz.deleteQuestions))
+
+
+
+
+
+
+
+
+
 
 
 
