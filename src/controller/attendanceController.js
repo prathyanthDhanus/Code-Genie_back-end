@@ -5,12 +5,25 @@ const createAttendance = async (req, res) => {
   const id = req.params.id
   const { date, status } = req.body;
   // console.log(id,date,status);
-  const existingAttendance = await attendance.findOne({ date });
+  const existingDate = await attendance.findOne({ date });
 
-  if (existingAttendance) {
-    // If the date exists, update the attendanceRecords array
-    existingAttendance.attendanceRecords.push({ student: id, status });
-    await existingAttendance.save();
+  if (existingDate) {
+    // Find the student within the attendanceRecords array
+    const findStudent = existingDate.attendanceRecords.find(
+      (record) => record.student.toString() === id
+    );
+    console.log(findStudent);
+
+    if (findStudent) {
+      // If the student exists for the given date, update the status
+      findStudent.status = status;
+    } else {
+      // If the student doesn't exist, add a new attendance record
+      existingDate.attendanceRecords.push({ student: id, status });
+    }
+
+    // Save the changes to the attendance record
+    await existingDate.save();
   } else {
     // If the date doesn't exist, create a new attendance record
     const newAttendance = new attendance({
@@ -19,13 +32,11 @@ const createAttendance = async (req, res) => {
     });
     await newAttendance.save();
   }
+
   return res.status(200).json({
-
     status: "success",
-
     message: "Attendance recorded successfully",
-
-  })
+  });
 }
 
 
